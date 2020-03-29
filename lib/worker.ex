@@ -57,7 +57,10 @@ defmodule Metex.Worker do
   end
 
   defp apikey do
-    System.get_env("WEATHER_API_KEY")
+    System.get_env("WEATHER_API_KEY") ||
+      raise """
+      environment variable WEATHER_API_KEY is missing.
+      """
   end
 
   defp update_stats(old_stats, location) do
