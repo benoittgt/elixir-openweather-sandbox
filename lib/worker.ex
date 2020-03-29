@@ -19,7 +19,15 @@ defmodule Metex.Worker do
     GenServer.cast(pid, :reset_stats)
   end
 
+  def stop(pid) do
+    GenServer.cast(pid, :stop)
+  end
+
   ## Server Callbacks
+
+  def init(:ok) do
+    {:ok, %{}}
+  end
 
   def handle_call({:location, location}, _from, stats) do
     case temperature_of(location) do
@@ -39,8 +47,14 @@ defmodule Metex.Worker do
     {:noreply, %{}}
   end
 
-  def init(:ok) do
-    {:ok, %{}}
+  def handle_cast(:stop, stats) do
+    {:stop, :normal, stats}
+  end
+
+  def terminate(reason, stats) do
+    IO.puts "server terminated because of #{inspect reason}"
+      inspect stats
+    :ok
   end
 
   ## Helper Functions
