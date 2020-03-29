@@ -22,7 +22,7 @@ defmodule Metex.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.6"},
-      {:json, "~> 1.2"}
+      {:poison, "~> 3.1"}
     ]
   end
 end
