@@ -52,8 +52,10 @@ defmodule Metex.Worker do
   end
 
   def terminate(reason, stats) do
-    IO.puts "server terminated because of #{inspect reason}"
-      inspect stats
+    IO.puts """
+    server terminated because of #{inspect reason}
+    stats: #{inspect stats}
+    """
     :ok
   end
 
